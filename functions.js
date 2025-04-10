@@ -24,8 +24,8 @@ export function setStep(id, stepsArray, infoProcess) {
 
 
         var responsible = ''
-
-        if (step.responsible) responsible = step.responsible.length > 14 ? step.responsible.substring(0, 14) + '...' : step.responsible
+        
+        if (step.responsible) responsible = step.responsible.length > 14 ? step.responsible.substring(0, 14) + '...' : step.responsible 
 
         if (step.responsible == null) {
             structStep += `<p class="stepContentOwner" style="visibility: hidden;">${responsible}</p>`;
@@ -72,8 +72,8 @@ export function setStep(id, stepsArray, infoProcess) {
                                 <div class="contentModalItem-profile">
                                     <img src="ft.png" class="photoModalStep">
                                     <div class="contentModalItem-text">
-                                        <a class="modalStepName">${stepData.responsible || 'Não definido'}</a>
-                                         ${stepData.typeResponsible === 'user' ? `<p class="modalStepPosition">Usuário</p>` : ''}
+                                        <a class="modalStepName" href="https://concessionariarota156340.fluig.cloudtotvs.com.br:1700/portal/p/1/social/lucassilva" target="_blank">${stepData.responsible || 'Não definido'}</a>
+                                         ${ stepData.typeResponsible === 'user' ? `<p class="modalStepPosition">Usuário</p>` : ''}
                                     </div>
                                 </div>
                             </div>
@@ -106,21 +106,15 @@ export function setStepActive(id, idElem) {
 
             if (stepId < idElem) {
                 $step.addClass('stepCompletNro');
-
-                console.log('olaaaaaaaaaaa')
             } else if (stepId === idElem) {
-                console.log('oiiiiiiiiiiii')
                 $step.addClass('stepActiveNro');
 
                 if (!deadlineStr) {
-                    console.log('aaaaaaaaaaaaaaaaa')
                     $progressBar.css({
                         width: '100%',
                         backgroundColor: 'white'
                     });
                     return;
-                } else {
-                    console.log('aaaaaaaaaaaaaaaaa')
                 }
             }
 
