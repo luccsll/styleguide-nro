@@ -622,7 +622,6 @@ export function _toggleNegativeField(radioName, fieldId) {
     }
 }
 
-
 function formatDateInfo(date) {
     const currentDate = new Date();
     const currentDateOnly = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
@@ -662,3 +661,5 @@ function formatDateInfo(date) {
         barColor
     };
 }
+
+//01
