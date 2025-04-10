@@ -626,6 +626,14 @@ export function _suggestionComment(arraySuggestions, activity) {
     });
 }
 
+export function _toggleNegativeField(radioName, fieldId) {
+    if ($(`input[name="${radioName}"]:checked`).val() == 'Não') {
+        $(`#${fieldId}`).addClass('fieldRequired');
+    } else {
+        $(`#${fieldId}`).removeClass('fieldRequired');
+    }
+}
+
 
 function formatDateInfo(date) {
     const currentDate = new Date();
