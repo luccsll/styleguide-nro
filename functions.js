@@ -1,4 +1,4 @@
-export function setStep(id, stepsArray, infoProcess) {
+export function _setStep(id, stepsArray, infoProcess) {
     const stepsContainer = id;
     stepsContainer.empty();
 
@@ -92,7 +92,7 @@ export function setStep(id, stepsArray, infoProcess) {
     });
 }
 
-export function setStepActive(id, idElem) {
+export function _setStepActive(id, idElem) {
     let delay = 600;
 
     for (let step of id.children()) {
@@ -175,7 +175,7 @@ export function setStepActive(id, idElem) {
  * @returns {object} Retorna um objeto contendo a hierarquia do integrante.
  */
 
-export function searchLeader(dataset, searchParam, request) {
+export function _searchLeader(dataset, searchParam, request) {
     try {
         var dataset_00 = DatasetFactory.getDataset(dataset, null, new Array(DatasetFactory.createConstraint("MATRICULA", searchParam, searchParam, ConstraintType.MUST)), null);
         var position_00 = dataset_00.values[dataset_00.values.length - 1]
@@ -499,6 +499,131 @@ export function searchLeader(dataset, searchParam, request) {
             2
         );
     }
+}
+
+export function _handleProcessError(callback) {
+	let errorMessage = '';
+	if (typeof callback === 'string') {
+		console.log("AA")
+        errorMessage = callback;
+    } else if (typeof callback === 'object' && callback.message) {
+		console.log("BB")
+        errorMessage = callback.message;
+    } else {
+		console.log("CC")
+        errorMessage = 'Este erro ainda não foi mapeado. Por favor, entre em contato com a equipe de TI para suporte';
+    }
+
+    var html = `	<section class="modalMessage" id="modalMessage">
+				<div class="containerModalMessage">
+					<div class="containerModalMessage-top">
+						<img class="illustrationMsgError" src="/style-guide/images/illustrations/caution.svg"
+							title="caution">
+						<div class="titleModalMessage">
+							<h1>Oops!</h1>
+							<p>Parece que algo deu errado</p>
+						</div>
+						<p class="msgContactIT">Por favor, entre em contato com a equipe de <span
+								class="fontWeigth">Sistemas TI</span> para suporte ou tente atualizar a
+							página em alguns minutos. Estamos aqui para ajudar</p>
+					</div>
+					<div class="containerModalMessage-bottom">
+						<button class="btnBlue-2" onclick="window.location.reload()">Forçar reiniciação da
+							pagina</button>
+						<div class="containerShowMsgError">
+							<p class="btnTextBlue" id="textShowError">Exibir erro</p>
+
+							<div class="containerShowMsgError-content">${errorMessage}</div>
+						</div>
+					</div>
+
+				</div>
+			</section>`
+
+    $('#form').append(html)
+
+    let textShowError = $('#textShowError')
+    var div = $('.containerShowMsgError-content');
+
+    textShowError.on('click', function () {
+
+        div.toggleClass('showMsgError')
+
+        if (div.hasClass('showMsgError')) {
+            textShowError.text('Ocultar erro')
+
+        } else {
+            textShowError.text('Exibir erro')
+
+        }
+    })
+
+}
+
+export function _suggestionComment(arraySuggestions, activity) {
+
+    Object.entries(arraySuggestions).forEach(([key, { field, suggestions }]) => {
+        if (parseInt(key) === activity) {
+            let containerSuggestion = `<ul class="commentSuggestion-list" id="commentSuggestion-list" ${field.includes("negativeReason") ? 'style="margin: 0 auto;"' : ''}>`;
+
+            Object.entries(suggestions).forEach(([action, suggestionList]) => {
+                suggestionList.forEach((suggestion) => {
+                    containerSuggestion += `<li class='commentSuggestion-item' data-action="${action}">${suggestion}</li>`;
+                });
+            });
+
+            containerSuggestion += '</ul>';
+
+            var structHtml = `<div class="commentSuggestion" id="commentSuggestions${activity}">
+                                <p class="commentSuggestion-title">Sugestões de comentários</p>
+                                ${containerSuggestion}
+                              </div>`;
+
+            $('#' + field).after(structHtml);
+        }
+    });
+
+    $('.commentSuggestion-item').each(function () {
+        var action = $(this).attr('data-action');
+        action === 'aprove' ? $(this).show() : $(this).hide();
+    });
+
+    $('input[type="radio"]').on('change', function () {
+        if ($(this).val() === 'Não' && $(this).is(':checked')) {
+
+            $('.commentSuggestion-item').each(function () {
+                var action = $(this).data('action');
+                if (action === 'reprove') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        } else if ($(this).val() === 'Sim' && $(this).is(':checked')) {
+
+            $('.commentSuggestion-item').each(function () {
+                var action = $(this).data('action');
+                if (action === 'aprove') {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        } else {
+            $('.commentSuggestion-item').show();
+        }
+    });
+
+    $('.commentSuggestion-item').on('click', function () {
+        var inputed = $("#" + $(this).closest('.form-group').find('textarea').attr('id'));
+
+        if (inputed.val() == '' || inputed.val() == null) {
+            inputed.val($(this).text());
+        } else {
+            inputed.val('');
+            inputed.val($(this).text());
+        }
+    });
 }
 
 
