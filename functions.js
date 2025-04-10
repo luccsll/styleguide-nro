@@ -503,14 +503,12 @@ export function _searchLeader(dataset, searchParam, request) {
 
 export function _handleProcessError(callback) {
 	let errorMessage = '';
+    
 	if (typeof callback === 'string') {
-		console.log("AA")
         errorMessage = callback;
     } else if (typeof callback === 'object' && callback.message) {
-		console.log("BB")
         errorMessage = callback.message;
     } else {
-		console.log("CC")
         errorMessage = 'Este erro ainda não foi mapeado. Por favor, entre em contato com a equipe de TI para suporte';
     }
 
@@ -557,7 +555,6 @@ export function _handleProcessError(callback) {
 
         }
     })
-
 }
 
 export function _suggestionComment(arraySuggestions, activity) {
