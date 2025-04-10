@@ -166,15 +166,6 @@ export function _setStepActive(id, idElem) {
     }
 }
 
-/**
- * Busca a hierarquia de um integrante a partir de um dataset.
- * 
- * @param {string} dataset - Nome do dataset onde serão buscadas as informações.
- * @param {string} searchPara - Matrícula do integrante a ser pesquisado.
- * @param {"all" | "" | "GERENTE" | "DIRETOR"} request - Tipo de líderes desejados. Use "all" para todos ou uma string vazia ("") para padrão ou especifique um cargo como "SUPERVISOR", "COORDENADOR", "GERENTE" ou "DIRETOR" separado por uma virgula.
- * @returns {object} Retorna um objeto contendo a hierarquia do integrante.
- */
-
 export function _searchLeader(dataset, searchParam, request) {
     try {
         var dataset_00 = DatasetFactory.getDataset(dataset, null, new Array(DatasetFactory.createConstraint("MATRICULA", searchParam, searchParam, ConstraintType.MUST)), null);
@@ -503,7 +494,7 @@ export function _searchLeader(dataset, searchParam, request) {
 
 export function _handleProcessError(callback) {
 	let errorMessage = '';
-    
+
 	if (typeof callback === 'string') {
         errorMessage = callback;
     } else if (typeof callback === 'object' && callback.message) {
