@@ -106,15 +106,21 @@ export function setStepActive(id, idElem) {
 
             if (stepId < idElem) {
                 $step.addClass('stepCompletNro');
+
+                console.log('olaaaaaaaaaaa')
             } else if (stepId === idElem) {
+                console.log('oiiiiiiiiiiii')
                 $step.addClass('stepActiveNro');
 
                 if (!deadlineStr) {
+                    console.log('aaaaaaaaaaaaaaaaa')
                     $progressBar.css({
                         width: '100%',
                         backgroundColor: 'white'
                     });
                     return;
+                } else {
+                    console.log('aaaaaaaaaaaaaaaaa')
                 }
             }
 
