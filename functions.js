@@ -24,8 +24,8 @@ export function setStep(id, stepsArray, infoProcess) {
 
 
         var responsible = ''
-        
-        if (step.responsible) responsible = step.responsible.length > 14 ? step.responsible.substring(0, 14) + '...' : step.responsible 
+
+        if (step.responsible) responsible = step.responsible.length > 14 ? step.responsible.substring(0, 14) + '...' : step.responsible
 
         if (step.responsible == null) {
             structStep += `<p class="stepContentOwner" style="visibility: hidden;">${responsible}</p>`;
@@ -73,7 +73,7 @@ export function setStep(id, stepsArray, infoProcess) {
                                     <img src="ft.png" class="photoModalStep">
                                     <div class="contentModalItem-text">
                                         <a class="modalStepName">${stepData.responsible || 'Não definido'}</a>
-                                         ${ stepData.typeResponsible === 'user' ? `<p class="modalStepPosition">Usuário</p>` : ''}
+                                         ${stepData.typeResponsible === 'user' ? `<p class="modalStepPosition">Usuário</p>` : ''}
                                     </div>
                                 </div>
                             </div>
@@ -102,14 +102,22 @@ export function setStepActive(id, idElem) {
         setTimeout(() => {
             const stepId = $step.data('id');
             const $progressBar = $step.find('.progressBarNro');
+            const deadlineStr = $step.data('deadline');
 
             if (stepId < idElem) {
                 $step.addClass('stepCompletNro');
             } else if (stepId === idElem) {
                 $step.addClass('stepActiveNro');
+
+                if (!deadlineStr) {
+                    $progressBar.css({
+                        width: '100%',
+                        backgroundColor: 'white'
+                    });
+                    return;
+                }
             }
 
-            const deadlineStr = $step.data('deadline');
             const deadline = new Date(deadlineStr);
             const now = new Date();
 
