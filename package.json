@@ -1,0 +1,19 @@
+{
+  "name": "styleguide-nro",
+  "version": "1.0.0",
+  "description": "Style guide for Nova Rota do Oeste",
+  "main": "index.js",
+  "scripts": {
+    "build-errorHandler": "terser functions/src/errorHandler.js -o functions/min/errorHandler.min.js -c -m",
+    "build-formInteractions": "terser functions/src/formInteractions.js -o functions/min/formInteractions.min.js -c -m",
+    "build-progress": "terser functions/src/progress.js -o functions/min/progress.min.js -c -m",
+    "build-search": "terser functions/src/search.js -o functions/min/search.min.js -c -m",
+    "build-index": "terser functions/src/*.js -o functions/min/index.min.js -c -m"
+  },
+  "keywords": [],
+  "author": "Lucas Da Silva Lima",
+  "license": "ISC",
+  "devDependencies": {
+    "terser": "^5.0.0"
+  }
+}
