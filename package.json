@@ -8,6 +8,7 @@
     "build-formInteractions": "terser functions/src/formInteractions.js -o functions/min/formInteractions.min.js -c -m",
     "build-progress": "terser functions/src/progress.js -o functions/min/progress.min.js -c -m",
     "build-search": "terser functions/src/search.js -o functions/min/search.min.js -c -m",
+    "build-utils": "terser functions/src/utils.js -o functions/min/utils.min.js -c -m",
     "build-index": "terser functions/src/*.js -o functions/min/index.min.js -c -m",
     "build-css": "cleancss -o css/min/normalize.min.css css/src/normalize.css"
   },
